@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Test</title>
+    <style>
+        body {
+            margin:0;
+            padding:0;
+        }
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit : cover;
+        }
+    </style>
+</head>
+<body margins = "0">
+    <video autoplay muted loop fit class = "background">
+        <source src="main_loop.mp4" type="video/mp4">
+    </video>
+    <audio muted loop id = "myAudio">
+        <source src = "main_audio.mp3" type = "audio/mpeg">
+    </audio>
+    <script>
+        const audio = document.getElementById('myAudio');
+        function enableAudio() {
+            audio.muted = false;
+            audio.play().catch(error => {
+            console.log("Playback prevented by browser:", error);
+            });
+            document.removeEventListener('click', enableAudio);
+        }
+        document.addEventListener('click', enableAudio);
+    </script>
+</body>
+</html>
