@@ -19,12 +19,12 @@
         }
     </style>
 </head>
-<body margins = "0">
-    <video autoplay muted loop fit playsinline class = "background">
+<body>
+    <video autoplay muted loop playsinline class = "background">
         <source src="https://archive.org/download/main_loop/main_loop.mp4" type="video/mp4">
     </video>
-    <audio muted loop id = "aud" autoplay style = "display: none;">
-        <source src = "https://archive.org/download/main_audio_202609/main_audio.mp3" type = "audio/mpeg">
+    <audio loop id = "aud">
+        <source src = "https://archive.org/download/untitled_20260907/Untitled.mp3" type = "audio/mpeg">
     </audio>
     <script>
         const audio = document.getElementById("aud");
@@ -34,17 +34,19 @@
                 audio.play().catch(error => {
                     console.log("Playback blocked, waiting for user input: ", error);
                 });
+                console.log("Audio playing: ", audio.paused);
             }
             else {
                 audio.addEventListener("loadedmetadata", () => {
                     audio.currentTime = Math.random() * audio.duration;
                     audio.play().catch(error => {
                         console.log("Playback blocked: waiting for user input", error)
-                });
+                    });
+                    console.log("Audio duration: ", audio.duration);
                 }, { once: true });
             }
         }
-        window.addEventListener("DOMContentLoaded", setRandomPlay);
+        document.addEventListener("DOMContentLoaded", setRandomPlay);
         document.addEventListener("click", () => audio.paused && setRandomPlay(), { once: true });
     </script>
 </body>
