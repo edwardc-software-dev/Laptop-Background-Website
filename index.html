@@ -44,8 +44,8 @@
                 }, { once: true });
             }
         }
-        window.addEventListener("DOMContentLoaded", setRandomTimeAndPlay);
-        document.addEventListener("click", () => audio.paused && setRandomTimeAndPlay(), { once: true });
+        window.addEventListener("DOMContentLoaded", setRandomPlay);
+        document.addEventListener("click", () => audio.paused && setRandomPlay(), { once: true });
     </script>
 </body>
 </html>
