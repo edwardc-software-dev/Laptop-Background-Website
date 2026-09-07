@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Background Test</title>
+    <title>Nightcord Background</title>
     <style>
         body {
             margin:0;
@@ -23,19 +23,29 @@
     <video autoplay muted loop fit playsinline class = "background">
         <source src="https://archive.org/download/main_loop/main_loop.mp4" type="video/mp4">
     </video>
-    <audio muted loop id = "myAudio">
+    <audio muted loop id = "aud" autoplay style = "display: none;">
         <source src = "https://archive.org/download/main_audio_202609/main_audio.mp3" type = "audio/mpeg">
     </audio>
     <script>
-        const audio = document.getElementById('myAudio');
-        function enableAudio() {
-            audio.muted = false;
-            audio.play().catch(error => {
-            console.log("Playback prevented by browser:", error);
-            });
-            document.removeEventListener('click', enableAudio);
+        const audio = document.getElementById("aud");
+        function setRandomPlay() {
+            if (audio.readyState >= 1) {
+                audio.currentTime = Math.random() * audio.duration;
+                audio.play().catch(error => {
+                    console.log("Playback blocked, waiting for user input: ", error);
+                });
+            }
+            else {
+                audio.addEventListener("loadedmetadata", () => {
+                    audio.currentTime = Math.random() * audio.duration;
+                    audio.play().catch(error => {
+                        console.log("Playback blocked: waiting for user input", error)
+                });
+                }, { once: true });
+            }
         }
-        document.addEventListener('click', enableAudio);
+        window.addEventListener("DOMContentLoaded", setRandomTimeAndPlay);
+        document.addEventListener("click", () => audio.paused && setRandomTimeAndPlay(), { once: true });
     </script>
 </body>
 </html>
