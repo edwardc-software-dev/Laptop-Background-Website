@@ -4,50 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nightcord Background</title>
-    <style>
-        body {
-            margin:0;
-            padding:0;
-        }
-        .background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit : cover;
-        }
-    </style>
+    <link rel="stylesheet" href="laptop_background.css">
 </head>
 <body>
-    <video autoplay muted loop playsinline class = "background">
-        <source src="https://archive.org/download/main_loop/main_loop.mp4" type="video/mp4">
+    <video autoplay muted loop playsinline id = "background" src = "https://archive.org/download/main_loop/main_loop.mp4" type = "video/mp4">
     </video>
-    <audio loop id = "aud">
-        <source src = "https://archive.org/download/untitled_20260907/Untitled.mp3" type = "audio/mpeg">
+    <audio loop id = "aud" src= "https://archive.org/download/untitled_20260907/Untitled.mp3" type = "audio/mpeg">
     </audio>
-    <script>
-        const audio = document.getElementById("aud");
-        function setRandomPlay() {
-            if (audio.readyState >= 1) {
-                audio.currentTime = Math.random() * audio.duration;
-                audio.play().catch(error => {
-                    console.log("Playback blocked, waiting for user input: ", error);
-                });
-                console.log("Audio playing: ", audio.paused);
-            }
-            else {
-                audio.addEventListener("loadedmetadata", () => {
-                    audio.currentTime = Math.random() * audio.duration;
-                    audio.play().catch(error => {
-                        console.log("Playback blocked: waiting for user input", error)
-                    });
-                    console.log("Audio duration: ", audio.duration);
-                }, { once: true });
-            }
-        }
-        document.addEventListener("DOMContentLoaded", setRandomPlay);
-        document.addEventListener("click", () => audio.paused && setRandomPlay(), { once: true });
-    </script>
+    <script src = "laptop_background.js" defer></script>
 </body>
 </html>
