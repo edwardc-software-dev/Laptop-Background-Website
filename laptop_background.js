@@ -30,16 +30,14 @@ function changeBackground() {
     if (hours >= 18 || hours < 1) {
         playBackground("https://archive.org/download/main_loop/main_loop.mp4");
     }
-    else if (hours >= 1 || hours < 8) {
+    else if (hours >= 1 && hours < 8) {
         playBackground("https://archive.org/download/nightcord/nightcord.mp4");
     }
     else {
-        playBackground("https://archive.org/download/main_loop/main_loop.mp4");
+        playBackground("https://archive.org/download/heat_20260912/heat.mp4");
     }
-    setTimeout(changeBackground, 15 * 60 * 1000);
+    setTimeout(changeBackground, 5 * 60 * 1000);
 }
 document.addEventListener("DOMContentLoaded", setRandomPlay);
 document.addEventListener("DOMContentLoaded", changeBackground);
-document.addEventListener("click", () => audio.paused && setRandomPlay(), { once: true });
-
-
+document.addEventListener("click", () => audio.paused && audio.play().catch(error => console.log("Playback blocked: ", error)));
