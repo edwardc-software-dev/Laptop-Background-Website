@@ -91,11 +91,11 @@ function changeBackground() {
     setTimeout(changeBackground, 5 * 60 * 1000);
 }
 function combined() {
-    setRandomPlay();
     changeBackground();
     getTime();
     getNightcordTime();
     getD();
 }
+document.addEventListener("DOMContentLoaded", setRandomPlay);
 document.addEventListener("DOMContentLoaded", combined);
 document.addEventListener("click", () => audio.paused && audio.play().catch(error => console.log("Playback blocked: ", error)));
